@@ -7,6 +7,7 @@ use App\Http\Requests\StoreMedicoRequest;
 use App\Http\Resources\MedicoResource;
 use App\Models\Medico;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class MedicoController extends Controller
 {
@@ -43,13 +44,18 @@ class MedicoController extends Controller
     }
 
 
-    public function pacientesync(Request $request)
+    public function pacientesync(int $medico_id, Request $request)
     {
         //--Validation
         $data = $request->validate([
             'paciente_id' => 'required|exists:paciente,id',
             'medico_id' => 'required|exists:medico,id',
         ]);
+
+        //--Validate URL param with request param
+        if ( $medico_id != $request->medico_id){
+            return response()->json(['error'=>'Invalid request','message'=>'URL parameter and body not match!'],400);
+        }
         
         //--Sync Has Many
         $medico = Medico::find($request->medico_id);
