@@ -12,8 +12,11 @@ Route::post('auth/login', [AuthController::class,'login']);
 
 
 Route::get('cidades', [CidadeController::class,'index']);
-Route::get('medicos', [MedicoController::class,'index']);
 Route::get('pacientes', [PacienteController::class,'index']);
+
+Route::get('medicos', [MedicoController::class,'index']);
+Route::get('cidades/{cidade_id}/medicos', [MedicoController::class,'bycidade']);
+
 
 Route::group([
     'middleware' => 'auth:api',
