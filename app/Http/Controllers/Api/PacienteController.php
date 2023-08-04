@@ -38,4 +38,16 @@ class PacienteController extends Controller
     }
 
 
+    public function update(StorePacienteRequest $request, int $paciente_id)
+    {
+        $data = $request->validated();
+        
+        if ( !$paciente = Paciente::find($paciente_id) )
+            return response()->json(['message'=>'Paciente not found!'],404);
+
+        $paciente->update($data);
+        return new PacienteResource($paciente);
+    }
+
+
 }

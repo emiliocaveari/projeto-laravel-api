@@ -15,11 +15,14 @@ Route::get('cidades', [CidadeController::class,'index']);
 
 Route::get('pacientes', [PacienteController::class,'index']);
 Route::post('pacientes', [PacienteController::class,'store']);
+Route::put('pacientes/{paciente_id}', [PacienteController::class,'update']);
+
 
 Route::get('medicos', [MedicoController::class,'index']);
 Route::get('medicos/{medico_id}/pacientes', [MedicoController::class,'pacientes']);
 Route::get('cidades/{cidade_id}/medicos', [MedicoController::class,'bycidade']);
 Route::post('medicos', [MedicoController::class,'store']);
+Route::post('medicos/{id_medico}/pacientes', [MedicoController::class,'pacientesync']);
 
 Route::group([
     'middleware' => 'auth:api'

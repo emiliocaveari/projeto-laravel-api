@@ -27,6 +27,21 @@ class StorePacienteRequest extends FormRequest
             'celular' => 'required',
         ];
 
+        if ( $this->method() === 'PUT' ){
+
+            //--ID by route params
+            if (!isset($this->id)){
+                $this->merge(['id'=>($this->route()->parameters()['paciente_id'] ?? null)]);
+            }
+
+            $rules = [
+                'id'   => 'required',
+                'nome' => 'nullable',
+                'cpf' =>  "nullable|unique:paciente,cpf,{$this->id},id",
+                'celular' => 'nullable',
+            ];
+        }
+
         return $rules;
     }
 }
