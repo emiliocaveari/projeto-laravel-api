@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\CidadeController;
+use App\Http\Controllers\Api\MedicoController;
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 
@@ -10,6 +11,7 @@ Route::post('auth/login', [AuthController::class,'login']);
 
 
 Route::get('cidades', [CidadeController::class,'index']);
+Route::get('medicos', [MedicoController::class,'index']);
 
 Route::group([
     'middleware' => 'auth:api',
