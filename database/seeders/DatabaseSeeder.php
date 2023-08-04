@@ -5,6 +5,9 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 use App\Models\Cidade;
+use App\Models\Medico;
+use App\Models\MedicoPaciente;
+use App\Models\Paciente;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Database\Seeder;
@@ -35,6 +38,21 @@ class DatabaseSeeder extends Seeder
                     [ 'nome' => 'Piúma', 'estado' => 'Espirito Santo'],
                     [ 'nome' => 'Marataízes', 'estado' => 'Espirito Santo'],
             ))
+            ->create();
+
+        $pacientes = Paciente::factory()
+            ->count(10)
+            ->create();
+
+        $medicos = Medico::factory()
+            ->count(20)
+            ->recycle($cidades)
+            ->create();
+
+        MedicoPaciente::factory()
+            ->recycle($medicos)
+            ->recycle($pacientes)
+            ->count(5)
             ->create();
     }
 }
