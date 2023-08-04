@@ -18,6 +18,7 @@ class AuthController extends Controller
     public function login(Request $request)
     {
         $credentials = $request->only('email', 'password');
+        // dd($credentials);
 
         if (!$token = Auth::guard()->attempt($credentials)) {
             return response()->json(['error' => 'Unauthorized'], 401);
@@ -62,6 +63,5 @@ class AuthController extends Controller
     {
         return $this->respondWithToken(Auth::guard()->refresh());
     }
-
 
 }
