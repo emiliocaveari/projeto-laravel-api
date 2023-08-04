@@ -10,5 +10,11 @@ class Paciente extends Model
     use HasFactory;
 
     protected $table = 'paciente';
+
+    protected $fillable = [
+        'nome',
+        'cpf',
+        'celular',
+    ];
     
 }

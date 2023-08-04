@@ -12,12 +12,14 @@ Route::post('login', [AuthController::class,'login']);
 
 
 Route::get('cidades', [CidadeController::class,'index']);
+
 Route::get('pacientes', [PacienteController::class,'index']);
+Route::post('pacientes', [PacienteController::class,'store']);
 
 Route::get('medicos', [MedicoController::class,'index']);
 Route::get('medicos/{medico_id}/pacientes', [MedicoController::class,'pacientes']);
 Route::get('cidades/{cidade_id}/medicos', [MedicoController::class,'bycidade']);
-
+Route::post('medicos', [MedicoController::class,'store']);
 
 Route::group([
     'middleware' => 'auth:api'

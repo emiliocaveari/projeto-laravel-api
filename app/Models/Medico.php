@@ -13,6 +13,12 @@ class Medico extends Model
 
     protected $table = 'medico';
 
+    protected $fillable = [
+        'nome',
+        'especialidade',
+        'cidade_id',
+    ];
+
 
     public function cidade() : HasOne
     {
